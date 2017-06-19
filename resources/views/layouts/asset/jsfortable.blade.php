@@ -24,7 +24,7 @@
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="{{ url("assets/js/dataTables/dataTables.bootstrap.js") }}"></script>
 <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+<script src="{{ url("assets/js/dataTables/buttons.print.min.js") }}"></script>
 <script>
     $(document).ready(function () {
         $('#dataTables-table').dataTable({

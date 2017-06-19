@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Clubs;
-use App\Managers;
+use App\MenuPositions;
+use App\Positions;
 use App\Orders;
 use App\Stewards;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class OrdersController extends Controller
@@ -27,14 +29,29 @@ class OrdersController extends Controller
         return view('site.content.orders.create')->with([ 'stewards'=>$stewards,'title' => 'Додати замовлення']);
     }
 
+    public function create1($id_order)
+    {
+        $ordersid = Orders::select('id_order')->where('id_order',$id_order)->get();
+        $orders = [];
+        foreach ($ordersid as $order) {
+            $orders[$order->id_order] = $order->id_order;
+        }
+        $menupositionsid = MenuPositions::select('id_menu_position','position_name')->get();
+        $menupositions = [];
+        foreach ($menupositionsid as $menuposition) {
+            $menupositions[$menuposition->id_menu_position] = $menuposition->id_menu_position.' '.$menuposition->position_name;
+        }
+        return view('site.content.positions.create')->with([  'orders'=>$orders, 'menupositions'=>$menupositions , 'title' => 'Додати позицію в замовленні']);
+    }
+
 
     public function store()
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'table_number' => 'required',
-            'order_date' => 'required',
+            'table_number' => 'required|numeric|min:0',
+            'order_date' => 'required|date|after:yesterday',
             'steward_passport' => 'required|numeric'
 
         );
@@ -72,6 +89,15 @@ class OrdersController extends Controller
             ->with(['order' => $order, 'title' => 'Інформація про замовлення']);
     }
 
+    public function show1($id_order)
+    {
+//        $positions = Positions::select()->where('id_order',$id_order)->get();
+        $positions = DB::table('positions')->join('orders','orders.id_order','=','positions.id_order')->join('menu_positions','positions.id_menu_position','=','menu_positions.id_menu_position')
+            ->select()->where('orders.id_order',$id_order)->get();
+        $order = Orders::find($id_order);
+        return view('site.positions')->with(['positions' => $positions,'order'=>$order, 'title' => 'Замовлення №'.$id_order]);
+    }
+
     public function edit($id_order)
     {
         // get the nerd
@@ -94,8 +120,8 @@ class OrdersController extends Controller
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
 
-            'table_number' => 'required',
-            'order_date' => 'required',
+            'table_number' => 'required|numeric|min:0',
+            'order_date' => 'required|date|after:yesterday',
             'steward_passport' => 'required|numeric'
 
         );

@@ -32,8 +32,8 @@ class ManagersController extends Controller
             'manager_passport' => 'required|numeric',
             'surname' => 'required',
             'name' => 'required',
-            'salary' => 'required|numeric',
-            'birth_date' => 'required'
+            'salary' => 'required|numeric|min:0',
+            'birth_date' => 'required|date|after:06/19/1960|before:06/19/1999'
         );
 
         $validator = validator(Input::all(), $rules);
@@ -99,8 +99,8 @@ class ManagersController extends Controller
             'manager_passport' => 'required|numeric',
             'surname' => 'required',
             'name' => 'required',
-            'salary' => 'required|numeric',
-            'birth_date' => 'required'
+            'salary' => 'required|numeric|min:0',
+            'birth_date' => 'required|date|after:06/19/1960|before:06/19/1999'
         );
         $validator = validator(Input::all(), $rules);
 

@@ -58,8 +58,6 @@ class StatisticController extends Controller
             '60-80' => 0,
             '80+' => 0,
         ];
-
-
         $query = Managers::all();
 
         foreach ($query as $manager) {

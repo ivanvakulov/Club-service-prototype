@@ -35,7 +35,7 @@ class EventsController extends Controller
             'id_club' => 'required',
             'event_name' => 'required',
             'event_artist' => 'required',
-            'event_date' => 'required'
+            'event_date' => 'required|date|after:yesterday'
         );
 
         $validator = validator(Input::all(), $rules);
@@ -96,7 +96,7 @@ class EventsController extends Controller
             'id_club' => 'required',
             'event_name' => 'required',
             'event_artist' => 'required',
-            'event_date' => 'required'
+            'event_date' => 'required|date|after:yesterday'
         );
         $validator = validator(Input::all(), $rules);
 

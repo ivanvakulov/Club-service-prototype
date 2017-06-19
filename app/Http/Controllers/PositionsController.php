@@ -40,7 +40,7 @@ class PositionsController extends Controller
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'position_count' => 'required|numeric',
+            'position_count' => 'required|numeric|min:1',
             'id_order' => 'required|numeric',
             'id_menu_position' => 'required|numeric'
         );
@@ -69,7 +69,7 @@ class PositionsController extends Controller
             $club->income += $position->result_price;
             $club->save();
             $position->save();
-            return redirect('position');
+            return redirect('order');
         }
     }
 
@@ -110,7 +110,7 @@ class PositionsController extends Controller
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'position_count' => 'required|numeric',
+            'position_count' => 'required|numeric|min:1',
             'id_order' => 'required|numeric',
             'id_menu_position' => 'required|numeric'
         );
@@ -142,7 +142,7 @@ class PositionsController extends Controller
 
             // redirect
             //Session::flash('message', 'Картину успішно оновлено!');
-            return redirect('position');
+            return redirect('order');
         }
     }
 
@@ -162,7 +162,7 @@ class PositionsController extends Controller
 
         // redirect
         //Session::flash('message', 'Successfully deleted the nerd!');
-        return redirect('position');
+        return redirect('order');
     }
 
 }

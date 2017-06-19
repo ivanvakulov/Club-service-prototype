@@ -29,7 +29,7 @@ class MenuPositionsController extends Controller
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'position_name' => 'required',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric|min:0'
         );
 
         $validator = validator(Input::all(), $rules);
@@ -82,7 +82,7 @@ class MenuPositionsController extends Controller
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'position_name' => 'required',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric|min:0'
         );
         $validator = validator(Input::all(), $rules);
 

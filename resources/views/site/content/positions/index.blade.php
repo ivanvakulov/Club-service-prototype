@@ -6,7 +6,7 @@
         </h1>
 
         <div class="breadcrumb">
-            <li><a  href="{{ URL::to('position/create') }}">Додати позицію в замовленні</a>
+            <li><a  href="{{ URL::to('order') }}">До замовлень</a>
         </div>
 
 
@@ -24,10 +24,11 @@
                             <table class="table table-striped table-bordered table-hover" id="dataTables-table">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    {{--<th>ID</th>--}}
+                                    {{--<th>Номер замовлення</th>--}}
+                                    <th>Назва позиції меню</th>
                                     <th>Кількість</th>
-                                    <th>Номер замовлення</th>
-                                    <th>Номер позиції меню</th>
+                                    <th>Ціна</th>
                                     <th>Загальна ціна</th>
                                     @if( Illuminate\Support\Facades\Auth::user()->position == 'Менеджер' || Illuminate\Support\Facades\Auth::user()->position == 'Старший офіціант')
                                     <th>Управління</th>
@@ -37,10 +38,11 @@
                                 <tbody>
                                 @foreach($positions as $position)
                                     <tr class="gradeA">
-                                        <td>{{$position->id_order_position}}</td>
+                                        {{--<td>{{$position->id_order_position}}</td>--}}
+                                        {{--<td><a href="{{ URL::to('order/' . $position->id_order)  }}">{{$position->id_order}}</a></td>--}}
+                                        <td><a href="{{ URL::to('menuposition/' . $position->id_menu_position)  }}">{{$position->position_name}}</a></td>
                                         <td>{{$position->position_count}}</td>
-                                        <td><a href="{{ URL::to('order/' . $position->id_order)  }}">{{$position->id_order}}</a></td>
-                                        <td><a href="{{ URL::to('menuposition/' . $position->id_menu_position)  }}">{{$position->id_menu_position}}</a></td>
+                                        <td>{{$position->price}}</td>
                                         <td>{{$position->result_price}}</td>
                                         @if( Illuminate\Support\Facades\Auth::user()->position == 'Менеджер' || Illuminate\Support\Facades\Auth::user()->position == 'Старший офіціант')
                                         <td>
@@ -56,7 +58,10 @@
                                     </tr>
                                 @endforeach
                                 </tbody>
+                                {{--<h1 style="float: right" class="page-header">Сума: {{$position->order_sum}}</h1></th>--}}
+
                             </table>
+                            <h1 style="float: right" class="price page-header">Сума: {{ $order->order_sum }}</h1>
                         </div>
 
                     </div>

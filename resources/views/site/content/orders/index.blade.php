@@ -49,8 +49,8 @@
                                         @endif
                                         <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                                         <a class="btn btn-small btn-success" href="{{ URL::to('order/' . $order->id_order)  }}"><i class="fa fa-eye"></i></a>
-
-
+                                        <a class="btn btn-small btn-warning" href="{{ URL::to('/position/create/' . $order->id_order) }}"><i class="fa fa-plus-square"></i></a>
+                                        <a class="btn btn-small btn-primary" href="{{ URL::to('/position/show/' . $order->id_order)  }}"><i class="fa fa-bars"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

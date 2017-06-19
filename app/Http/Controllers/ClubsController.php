@@ -31,7 +31,7 @@ class ClubsController extends Controller
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'club_name' => 'required',
-            'number_of_workers' => 'required|numeric',
+            'number_of_workers' => 'required|numeric|min:0',
             'manager_passport' => 'required'
         );
 
@@ -86,7 +86,7 @@ class ClubsController extends Controller
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'club_name' => 'required',
-            'number_of_workers' => 'required|numeric',
+            'number_of_workers' => 'required|numeric|min:0',
             'manager_passport' => 'required'
         );
         $validator = validator(Input::all(), $rules);

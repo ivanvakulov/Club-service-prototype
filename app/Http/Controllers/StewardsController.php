@@ -38,10 +38,10 @@ class StewardsController extends Controller
             'id_club' => 'required',
             'surname' => 'required',
             'name' => 'required',
-            'birth_date' => 'required',
-            'email' => 'required',
-            'sum_per_day' => 'required',
-            'salary' => 'required',
+            'birth_date' => 'required|date|after:06/19/1960|before:06/19/1999',
+            'email' => 'required|email',
+            'sum_per_day' => 'required|numeric|min:0',
+            'salary' => 'required|numeric|min:0',
             'is_main' => 'required'
         );
 
@@ -122,10 +122,10 @@ class StewardsController extends Controller
             'id_club' => 'required',
             'surname' => 'required',
             'name' => 'required',
-            'birth_date' => 'required',
-            'email' => 'required',
-            'sum_per_day' => 'required',
-            'salary' => 'required',
+            'birth_date' => 'required|date|after:06/19/1960|before:06/19/1999',
+            'email' => 'required|email',
+            'sum_per_day' => 'required|numeric|min:0',
+            'salary' => 'required|numeric|min:0',
             'is_main' => 'required'
         );
         $validator = validator(Input::all(), $rules);

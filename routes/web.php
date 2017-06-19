@@ -15,13 +15,16 @@ Route::group(['middleware' => [ 'auth']], function (){
 
     Route::match(['get','post'], '/', ['uses' => 'MainController@index', 'as' => 'main']);
     Route::match(['get','post'], '/statistic', ['uses' => 'StatisticController@index', 'as' => 'statistic']);
+    Route::match(['get','post'], '/mine/{steward_passport}', ['uses' => 'MineController@index', 'as' => 'mine']);
     Route::match(['get','post'], '/cards', ['uses' => 'CardsController@index', 'as' => 'cards']);
     Route::match(['get','post'], '/password', ['uses' => 'MainController@password', 'as' => 'password']);
     Route::match(['get','put'], '/change', ['uses' => 'MainController@update', 'as' => 'change']);
-
+    Route::match(['get','put'],'/position/create/{id_order}',['uses' => 'OrdersController@create1', 'as' => 'add/{id_order}']);
+    Route::match(['get','put'],'/position/show/{id_order}',['uses' => 'OrdersController@show1', 'as' => 'show/{id_order}']);
 
     Route::resource('/order', 'OrdersController');
     Route::resource('/position', 'PositionsController');
+
     Route::resource('/menuposition', 'MenuPositionsController');
 
     Route::group(['middleware' => [ 'mainStewardManagerAccess']], function () {

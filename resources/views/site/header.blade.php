@@ -47,7 +47,11 @@
                 <li>
                     <a class="waves-effect waves-dark" href="{{ route('main') }}"><i class="fa fa-home"></i> Головна</a>
                 </li>
-
+                @if( Illuminate\Support\Facades\Auth::user()->position != 'Менеджер')
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ URL::to('mine/' . Illuminate\Support\Facades\Auth::user()->passport_number)  }}"><i class="fa fa-user"></i> Мої замовлення</a>
+                </li>
+                @endif
                 <li>
                     <a class="waves-effect waves-dark" href="{{ route('statistic') }}"><i class="fa fa-bar-chart-o"></i> Статистика</a>
                 </li>
@@ -56,9 +60,9 @@
                     <a href="#" class="waves-effect waves-dark"><i class="fa fa-table"></i>Категорії<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
 
-                        <li>
-                            <a href="{{ route('position.index') }}">Позиції замовлень</a>
-                        </li>
+                        {{--<li>--}}
+                            {{--<a href="{{ route('position.index') }}">Позиції замовлень</a>--}}
+                        {{--</li>--}}
                         <li>
                             <a href="{{ route('order.index') }}">Замовлення</a>
                         </li>
